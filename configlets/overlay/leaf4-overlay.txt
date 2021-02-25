@@ -2,4 +2,9 @@ interface Vxlan1
    vxlan source-interface Loopback1
    vxlan udp-port 4789
    vxlan vlan 10-30 vni 10010-10030
-   vxlan flood vtep 2.2.2.12 2.2.2.34
+   vxlan controller-client
+!
+management cvx
+   server host 192.168.0.18
+   no shutdown
+!
