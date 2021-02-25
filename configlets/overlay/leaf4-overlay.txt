@@ -1,10 +1,42 @@
 interface Vxlan1
    vxlan source-interface Loopback1
    vxlan udp-port 4789
-   vxlan vlan 10-30 vni 10010-10030
+   vxlan vlan 10-30, 4001-4002 vni 10010-10030, 4001-4002
    vxlan controller-client
 !
 management cvx
    server host 192.168.0.18
    no shutdown
+!
+vrf instance RED
+ip routing vrf RED
+vrf instance BLUE
+ip routing vrf BLUE
+!
+vlan 4001
+   name VRF-RED-IGP
+vlan 4002
+   name VRF-BLUE-IGP
+!
+interface Vlan4001
+   no shutdown
+   vrf RED
+   ip address 10.100.100.4/24
+!
+interface Vlan4002
+   no shutdown
+   vrf BLUE
+   ip address 10.200.200.4/24
+!
+router ospf 1 vrf RED
+   router-id 10.100.100.4
+   no shutdown
+   network 10.100.100.0/24 area 0
+   redistribute connected
+!
+router ospf 2 vrf BLUE
+   router-id 10.200.200.4
+   no shutdown
+   network 10.200.200.0/24 area 0
+   redistribute connected
 !

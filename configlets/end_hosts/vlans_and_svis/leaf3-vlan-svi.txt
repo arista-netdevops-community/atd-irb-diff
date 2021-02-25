@@ -1,9 +1,6 @@
 vlan 10
    name Ten
 !
-vlan 20
-   name Twenty
-!
 vlan 30
    name Thirty
 !
@@ -11,11 +8,6 @@ interface Vlan10
    no shutdown
    vrf RED
    ip address virtual 10.10.10.1/24
-!
-interface Vlan20
-   no shutdown
-   vrf BLUE
-   ip address virtual 20.20.20.1/24
 !
 interface Vlan30
    no shutdown
