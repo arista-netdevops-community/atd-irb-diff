@@ -1,0 +1,21 @@
+vrf instance RED
+ip routing vrf RED
+vrf instance BLUE
+ip routing vrf BLUE
+!
+router bgp 65012
+   vrf RED
+      rd 1.1.1.101:1
+      route-target export evpn 1:1
+      route-target import evpn 1:1
+      redistribute connected
+      redistribute attached-host
+      redistribute static
+   vrf BLUE
+      rd 1.1.1.101:2
+      route-target export evpn 2:2
+      route-target import evpn 2:2
+      redistribute connected
+      redistribute attached-host
+      redistribute static
+!

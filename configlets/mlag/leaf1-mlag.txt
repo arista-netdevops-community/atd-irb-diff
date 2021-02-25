@@ -1,0 +1,34 @@
+no spanning-tree vlan-id 4094
+!
+vlan 4094
+   name MLAGPEER
+   trunk group MLAGPEER
+!
+interface Vlan4094
+   description MLAG PEER SYNC
+   no autostate
+   ip address 10.0.0.1/30
+!
+interface Port-Channel1000
+   description MLAG PEER-LINK
+   switchport mode trunk
+   switchport trunk group MLAGPEER
+!
+interface Ethernet1
+   description MLAG Link to LEAF2
+   channel-group 1000 mode active
+!
+interface Ethernet6
+   description MLAG Link to LEAF2
+   channel-group 1000 mode active
+!
+mlag configuration
+   domain-id 1000
+   local-interface Vlan4094
+   peer-address 10.0.0.2
+   peer-link Port-Channel1000
+   reload-delay mlag 330
+   reload-delay non-mlag 300
+!
+ip virtual-router mac-address 00:1c:73:ca:fe:00
+!

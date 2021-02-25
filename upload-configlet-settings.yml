@@ -1,0 +1,14 @@
+---
+cvp_url_prefix: https://yle-test-new-1-720de527.topo.testdrive.arista.com:443
+cvp_user: arista
+cvp_password: aristacs80
+configlet_directories:
+  - configlets/base-shared
+  - configlets/base-device
+  - configlets/mlag
+  - configlets/underlay
+  - configlets/overlay
+  - configlets/end_hosts/ip_vrf
+  - configlets/end_hosts/vlans_and_svis
+  - configlets/end_hosts/ports
+  - host-configs

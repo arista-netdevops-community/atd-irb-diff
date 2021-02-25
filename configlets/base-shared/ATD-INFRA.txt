@@ -1,0 +1,33 @@
+daemon TerminAttr
+  exec /usr/bin/TerminAttr -ingestgrpcurl=192.168.0.5:9910 -taillogs -ingestauth=key,atd-lab -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent
+  no shutdown
+!
+dns domain atd.lab
+!
+ntp server 192.168.0.1 iburst source Management1
+!
+radius-server host 192.168.0.1 key 7 0207165218120E
+!
+aaa group server radius atds
+   server 192.168.0.1
+!
+spanning-tree mode mstp
+!
+aaa authentication login default group atds local
+aaa authorization exec default group atds local
+aaa authorization commands all default local
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret 5 $1$5O85YVVn$HrXcfOivJEnISTMb6xrJc.
+username arista privilege 15 role network-admin secret 5 $1$4VjIjfd1$XkUVulbNDESHFzcxDU.Tk1
+username arista ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCergemHjPJdv6dGu6zVRYOTjprjAMlg6L8ABxGJ+Fel1TpZYRXBGAuqNneT32vpa5gr9BiurXmk3V2TRop21G/3d+Ce9enKBAYUtV9hwInwkSASA1nnPIXnP0mnNP6YCHDcUWQ+6FzpyjcmKOTr6y5jCVyw7JLwo2LTiEYLRGyikmiMezPhBuyvDqaFAFlMKUawt4lj5kCn+tKRM01HLX69WuaiMx7VL7620ONaCoRHx2x08MC0DkOta5Umkxo0UwJxB1Z+VdrK7JdF1b3H9ZwFuuFzZD341a4+IlgrevhnG51NqZE8XBjOv8QEt1AMJ3yuYC5frSKuz2xUHT8b20d arista@yle-test-new-1-720de527
+!
+ip routing
+service routing protocols model multi-agent
+!
+ip radius source-interface Management1
+!
+management api http-commands
+   no shutdown
+!
