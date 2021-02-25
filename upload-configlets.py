@@ -2,9 +2,6 @@
 
 __author__ = 'Petr Ankudinov'
 
-# *** TESTED FOR CVP VERSIONS:
-# ***  2018.2.2
-
 import json
 import requests
 import sys
