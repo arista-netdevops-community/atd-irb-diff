@@ -1,25 +1,21 @@
 vlan 10
    name Ten
 !
+vlan 20
+   name Twenty
+!
 vlan 30
    name Thirty
-!
-router bgp 65034
-   vlan 10
-      rd 1.1.1.103:10
-      route-target import 10:10
-      route-target export 10:10
-      redistribute learned
-   vlan 30
-      rd 1.1.1.103:30
-      route-target import 30:30
-      route-target export 30:30
-      redistribute learned
 !
 interface Vlan10
    no shutdown
    vrf RED
    ip address virtual 10.10.10.1/24
+!
+interface Vlan20
+   no shutdown
+   vrf BLUE
+   ip address virtual 20.20.20.1/24
 !
 interface Vlan30
    no shutdown

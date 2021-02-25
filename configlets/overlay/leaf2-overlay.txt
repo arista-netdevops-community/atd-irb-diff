@@ -1,23 +1,5 @@
 interface Vxlan1
    vxlan source-interface Loopback1
-   vxlan virtual-router encapsulation mac-address mlag-system-id
    vxlan udp-port 4789
    vxlan vlan 10-30 vni 10010-10030
-   vxlan vrf RED vni 99001
-   vxlan vrf BLUE vni 99002
-!
-router bgp 65012
-   neighbor EVPN-OVERLAY-PEERS peer group
-   neighbor EVPN-OVERLAY-PEERS remote-as 65000
-   neighbor EVPN-OVERLAY-PEERS update-source Loopback0
-   neighbor EVPN-OVERLAY-PEERS bfd
-   neighbor EVPN-OVERLAY-PEERS ebgp-multihop 3
-   neighbor EVPN-OVERLAY-PEERS password 7 Jvf4RYGH+51PCxaLRIwJLA==
-   neighbor EVPN-OVERLAY-PEERS send-community
-   neighbor EVPN-OVERLAY-PEERS maximum-routes 0
-   neighbor 1.1.1.201 peer group EVPN-OVERLAY-PEERS
-   neighbor 1.1.1.202 peer group EVPN-OVERLAY-PEERS
-   !
-   address-family evpn
-      neighbor EVPN-OVERLAY-PEERS activate
-!
+   vxlan flood vtep 2.2.2.12 2.2.2.34
